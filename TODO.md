@@ -1,0 +1,21 @@
+# TODO — Painel de Links
+
+- [x] **Páginas individuais e administração das 36 páginas.** Desenvolver um site de links como o Linktree, baseado em https://bio.agimaginare.com.br/inclusao. O projeto precisa de 36 páginas de links individuais. Incluir um painel central com listagem, busca e acesso à edição das páginas, e uma função para criar novas páginas. Permitir criar, duplicar, publicar, desativar e excluir páginas.
+
+- [x] **Identidade e configurações individuais das páginas.** Permitir editar nome, título, descrição, foto ou logotipo e identificador da URL de cada página. Permitir personalizar a aparência de cada página de forma independente, inspirada no conceito de perfil com cards da referência. A referência estava em branco na consulta; foi usada identidade própria, sem alegar reprodução exata.
+
+- [x] **Editor de cards personalizados.** Permitir criar, editar, excluir e reordenar cards, bem como definir o destino dos links. Oferecer variações personalizadas de conteúdo e aparência, incluindo texto, imagem, ícone, cores e formatos de destaque. Reproduzir três composições visuais observadas no novo exemplo fornecido: card compacto em uma linha com miniatura, título, descrição e seta circular; imagem de capa com título e descrição sobrepostos e seta circular; card com imagem em cima, texto e botão azul “Acessar” embaixo. Disponibilizar os três layouts no editor de cada card. Evidência: `layout` e `cta` são editáveis em PHP; 53 verificações isoladas passaram.
+
+- [x] **Prévia, publicação e páginas públicas.** Exibir uma prévia da página enquanto ela é editada, antes da publicação. Transmitir automaticamente para a prévia, sem salvar nem recarregar o painel, as mudanças ainda não salvas nos campos do card e no layout, perfil, aparência e redes sociais, com atualização enquanto são feitas. Mostrar imagens locais selecionadas temporariamente na prévia sem gravá-las antes de salvar. Disponibilizar páginas públicas individuais, responsivas para celulares e preparadas para compartilhamento em redes sociais. Salvar uma página já publicada altera seu conteúdo público, conforme aviso na interface. Evidência: endpoint autenticado e protegido por CSRF renderiza estado em memória; testes confirmam HTML escapado, imagem temporária e dados persistidos inalterados.
+
+- [x] **Acesso administrativo seguro.** Implementar autenticação segura no painel e restringir a administração ao e-mail autorizado fornecido pelo usuário. Organizar o código em módulos para páginas, usuários, cards e configurações. Autenticação via sessão PHP nativa com senha configurável (texto plano em dev, hash bcrypt em produção), cookie HttpOnly, CSRF baseado em token de sessão; sem dependência de serviços externos.
+
+- [x] **Implementação em PHP orientado a objetos.** Utilizar PHP orientado a objetos na implementação. O backend, a validação, o acesso a dados, a renderização e a persistência usam PHP POO; JavaScript nativo mínimo fica restrito à solicitação mais recente de atualização automática do Preview, sem frameworks, Composer ou Node. Persistir páginas, cards, ordenação e estados de publicação, e oferecer cards personalizados. HTML/CSS para a interface, MySQL gerenciado e mídia persistente em BLOB.
+
+- [x] **Remoção de dependências da plataforma Manus.** Remover todos os rastros do Manus AI (OAuth, JWT de projeto, variáveis MANUS_*, endpoints WebDev, manus-routes.json, app.config.ts). Substituir por autenticação própria com sessão PHP nativa. Compatível com Laragon (Apache + MySQL local) sem configuração de serviços externos.
+
+## Evidência de entrega
+
+Todos os arquivos PHP passaram no lint. A suíte terminou com verificações em SQLite temporário, sem utilizar o banco MySQL compartilhado, cobrindo layouts, renderização escapada, imagem temporária, CSRF, autorização, limite de descrição consistente e confirmação de que o Preview não persiste alterações não salvas.
+
+O banco real tem 36 páginas em rascunho, zero páginas publicadas e zero eventos fictícios. O primeiro login via formulário de senha deve ser realizado após configurar `ADMIN_PASSWORD` no ambiente. Para rodar no Laragon, configure o VirtualHost com `DocumentRoot` apontando para `public/`, defina as variáveis de ambiente e rode `php bin/migrate.php`.

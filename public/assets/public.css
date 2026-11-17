@@ -1,0 +1,1484 @@
+:root {
+    color-scheme: light;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    background: #f5f1eb;
+}
+
+body {
+    min-width: 280px;
+    min-height: 100%;
+    margin: 0;
+    background: #f5f1eb;
+    color: #183b34;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+    font-family: var(--bio-font-family, "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+}
+
+a {
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+}
+
+.bio-page {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-height: 100svh;
+    overflow: hidden;
+    background: var(--bio-background, #f5f1eb);
+    color: var(--bio-text, #183b34);
+    font-family: var(--bio-font-family, "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+}
+
+.bio-page[data-style="gradient"] {
+    background-image: linear-gradient(155deg, var(--bio-background, #f5f1eb) 0%, var(--bio-card-background, #fffdf9) 100%);
+}
+
+.bio-page[data-style="dotted"] {
+    background-image: radial-gradient(circle at 1px 1px, var(--bio-accent, #147d69) 1px, transparent 1.2px);
+    background-size: 24px 24px;
+}
+
+.bio-page__mesh {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.62;
+    background:
+        radial-gradient(34rem 26rem at 4% 0%, color-mix(in srgb, var(--bio-accent, #147d69) 13%, transparent), transparent 72%),
+        radial-gradient(30rem 24rem at 98% 92%, color-mix(in srgb, var(--bio-accent, #147d69) 10%, transparent), transparent 70%);
+}
+
+.bio-shell {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 490px);
+    min-height: 100svh;
+    margin: 0 auto;
+    padding: 28px 18px 24px;
+}
+
+.bio-preview-badge {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto 20px;
+    padding: 7px 11px;
+    border: 1px solid color-mix(in srgb, var(--bio-accent, #147d69) 30%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bio-card-background, #fffdf9) 75%, transparent);
+    color: var(--bio-accent, #147d69);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.bio-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 14px;
+    text-align: center;
+}
+
+.bio-profile__avatar {
+    display: grid;
+    width: 92px;
+    height: 92px;
+    margin-bottom: 17px;
+    overflow: hidden;
+    place-items: center;
+    border: 3px solid color-mix(in srgb, var(--bio-accent, #147d69) 20%, var(--bio-card-background, #fffdf9));
+    border-radius: 50%;
+    background: var(--bio-card-background, #fffdf9);
+    box-shadow: 0 10px 28px color-mix(in srgb, var(--bio-text, #183b34) 12%, transparent);
+}
+
+.bio-profile__avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bio-profile__monogram {
+    color: var(--bio-accent, #147d69);
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.bio-profile__copy {
+    width: 100%;
+}
+
+.bio-profile__name {
+    margin: 0 0 7px;
+    color: var(--bio-accent, #147d69);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.13em;
+    line-height: 1.35;
+    text-transform: uppercase;
+}
+
+.bio-profile h1 {
+    max-width: 100%;
+    margin: 0;
+    color: var(--bio-text, #183b34);
+    font-family: "Garet", "Poppins", sans-serif;
+    font-size: var(--bio-title-size, clamp(1.9rem, 8vw, 2.6rem));
+    font-weight: 800;
+    letter-spacing: -0.06em;
+    line-height: 1.06;
+    overflow-wrap: anywhere;
+}
+
+.bio-profile__description {
+    max-width: 40ch;
+    margin: 6px auto 0;
+    color: color-mix(in srgb, var(--bio-text, #183b34) 76%, transparent);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    white-space: pre-line;
+}
+
+.bio-cards {
+    display: grid;
+    gap: 12px;
+}
+
+.bio-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--bio-text, #183b34) 12%, transparent);
+    border-left: 4px solid var(--bio-card-accent, var(--bio-accent, #147d69));
+    border-radius: var(--bio-radius, 24px);
+    background: var(--bio-card-background, #fffdf9);
+    color: var(--bio-card-text, var(--bio-text, #183b34));
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--bio-text, #183b34) 6%, transparent);
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.bio-page[data-button-style="outline"] .bio-card--linked {
+    border-color: var(--bio-card-accent, var(--bio-accent, #147d69));
+    background: color-mix(in srgb, var(--bio-card-background, #fffdf9) 45%, transparent);
+}
+
+.bio-page[data-button-style="filled"] .bio-card--linked {
+    background: var(--bio-card-background, #fffdf9);
+}
+
+.bio-card--linked:hover {
+    transform: translateY(-2px);
+    border-color: var(--bio-card-accent, var(--bio-accent, #147d69));
+    box-shadow: 0 14px 30px color-mix(in srgb, var(--bio-text, #183b34) 12%, transparent);
+}
+
+.bio-card--linked:active {
+    transform: translateY(0);
+}
+
+.bio-card--highlight {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 25%, transparent), 0 12px 30px color-mix(in srgb, var(--bio-text, #183b34) 10%, transparent);
+}
+
+.bio-card__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 72px;
+    padding: 15px 17px 15px 14px;
+}
+
+.bio-card__main {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 12px;
+}
+
+.bio-card__icon {
+    display: grid;
+    flex: 0 0 38px;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: max(8px, calc(var(--bio-radius, 24px) / 2));
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 12%, transparent);
+    color: var(--bio-card-accent, var(--bio-accent, #147d69));
+}
+
+.bio-card__icon svg,
+.bio-card__arrow svg,
+.bio-socials__icon svg {
+    display: block;
+}
+
+.bio-card__copy {
+    display: flex;
+    min-width: 0;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.bio-card__title {
+    display: block;
+    font-family: "Garet", "Poppins", sans-serif;
+    color: var(--bio-card-title-color, var(--bio-card-text, var(--bio-text, #183b34)));
+    font-size: var(--bio-card-title-size, 1rem);
+    font-weight: var(--bio-card-title-weight, 800);
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+}
+
+.bio-card__description {
+    display: block;
+    margin: 0;
+    color: var(--bio-card-desc-color, color-mix(in srgb, var(--bio-card-text, var(--bio-text, #183b34)) 70%, transparent));
+    font-size: 0.86rem;
+    line-height: 1.42;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+.bio-card__arrow {
+    display: grid;
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    color: var(--bio-card-accent, var(--bio-accent, #147d69));
+    opacity: 0.82;
+}
+
+.bio-card__badge {
+    display: inline-flex;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 10px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 12%, transparent);
+    color: var(--bio-card-accent, var(--bio-accent, #147d69));
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.bio-card--heading,
+.bio-card--text {
+    padding: 17px 19px;
+}
+
+.bio-card--heading {
+    border-left-width: 0;
+    border-top: 3px solid var(--bio-card-accent, var(--bio-accent, #147d69));
+}
+
+.bio-card--heading .bio-card__heading,
+.bio-card--text .bio-card__heading {
+    margin: 0;
+    font-family: "Garet", "Poppins", sans-serif;
+    color: var(--bio-card-title-color, var(--bio-card-text, var(--bio-text, #183b34)));
+    font-size: var(--bio-card-title-size, 1.03rem);
+    font-weight: var(--bio-card-title-weight, 800);
+    letter-spacing: -0.03em;
+    line-height: 1.28;
+    overflow-wrap: anywhere;
+}
+
+.bio-card--heading .bio-card__description,
+.bio-card--text .bio-card__description {
+    margin-top: 7px;
+}
+
+.bio-card--image {
+    padding: 0;
+}
+
+.bio-card__image-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 12%, var(--bio-card-background, #fffdf9));
+}
+
+.bio-card__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bio-card--image .bio-card__body {
+    min-height: 68px;
+}
+
+.bio-empty {
+    display: grid;
+    min-height: 120px;
+    place-items: center;
+    padding: 26px 22px;
+    border: 1px dashed color-mix(in srgb, var(--bio-accent, #147d69) 38%, transparent);
+    border-radius: var(--bio-radius, 24px);
+    background: color-mix(in srgb, var(--bio-card-background, #fffdf9) 55%, transparent);
+    color: color-mix(in srgb, var(--bio-text, #183b34) 70%, transparent);
+    text-align: center;
+}
+
+.bio-empty p {
+    max-width: 27ch;
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
+
+.bio-socials {
+    margin-top: 27px;
+}
+
+.bio-socials ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bio-socials__link {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--bio-accent, #147d69) 24%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bio-card-background, #fffdf9) 60%, transparent);
+    color: var(--bio-accent, #147d69);
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+}
+
+.bio-socials__link:hover {
+    transform: translateY(-2px);
+    background: var(--bio-accent, #147d69);
+    color: var(--bio-card-background, #fffdf9);
+}
+
+.bio-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 34px;
+    padding-bottom: 4px;
+}
+
+.bio-footer__link {
+    color: color-mix(in srgb, var(--bio-text, #183b34) 58%, transparent);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.035em;
+    text-decoration: none;
+    transition: color 180ms ease;
+}
+
+.bio-footer__link:hover {
+    color: var(--bio-accent, #147d69);
+}
+
+.bio-card:focus-visible,
+.bio-socials__link:focus-visible,
+.bio-footer__link:focus-visible {
+    outline: 3px solid var(--bio-accent, #147d69);
+    outline-offset: 4px;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+@media (min-width: 540px) {
+    .bio-shell {
+        padding: 40px 22px 28px;
+    }
+
+    .bio-profile {
+        margin-bottom: 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .bio-card,
+    .bio-empty,
+    .bio-socials__link,
+    .bio-preview-badge {
+        border-color: currentColor;
+    }
+
+    .bio-profile__description,
+    .bio-card__description,
+    .bio-empty,
+    .bio-footer__link {
+        color: var(--bio-text, #183b34);
+    }
+}
+
+
+/* Public link-card layouts */
+.bio-card--layout-compact {
+    border-left-width: 0;
+    background: var(--bio-card-surface, var(--bio-card-background, #fffdf9));
+}
+
+.bio-card--layout-compact .bio-card__body {
+    min-height: 84px;
+    padding: 12px 13px;
+}
+
+.bio-card--layout-compact .bio-card__main {
+    flex: 1 1 auto;
+    gap: 12px;
+}
+
+.bio-card__thumbnail {
+    display: block;
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    overflow: hidden;
+    border-radius: max(9px, calc(var(--bio-radius, 24px) / 2));
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 14%, #fff);
+}
+
+.bio-card__thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bio-card__thumbnail--fallback {
+    display: grid;
+    place-items: center;
+    color: var(--bio-card-accent, var(--bio-accent, #147d69));
+}
+
+.bio-card--layout-compact .bio-card__copy {
+    overflow: hidden;
+}
+
+.bio-card--layout-compact .bio-card__title,
+.bio-card--layout-compact .bio-card__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+.bio-card__arrow--circle {
+    display: grid;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #fff;
+    opacity: 1;
+    transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.bio-card--linked:hover .bio-card__arrow--circle {
+    transform: translateX(2px);
+    background: #1d4ed8;
+}
+
+.bio-card--layout-cover {
+    min-height: 150px;
+    border: 0;
+    background: var(--bio-card-accent, var(--bio-accent, #147d69));
+    color: #fff;
+}
+
+.bio-card--layout-cover .bio-card__cover {
+    position: relative;
+    display: block;
+    min-height: 150px;
+    overflow: hidden;
+    color: #fff;
+}
+
+.bio-card__cover-image,
+.bio-card__cover-fallback,
+.bio-card__cover-shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bio-card__cover-image {
+    display: block;
+    object-fit: cover;
+    transition: transform 300ms ease;
+}
+
+.bio-card--linked:hover .bio-card__cover-image {
+    transform: scale(1.035);
+}
+
+.bio-card__cover-fallback {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--bio-card-accent, #2563eb), color-mix(in srgb, var(--bio-card-accent, #2563eb) 50%, #172554));
+    color: rgb(255 255 255 / 76%);
+}
+
+.bio-card__cover-shade {
+    background: linear-gradient(180deg, rgb(8 16 38 / 5%) 20%, rgb(8 16 38 / 85%) 100%);
+}
+
+.bio-card__cover-copy {
+    position: absolute;
+    right: 58px;
+    bottom: 16px;
+    left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.bio-card--layout-cover .bio-card__title {
+    font-family: "Garet", "Poppins", sans-serif;
+    color: var(--bio-card-title-color, #fff);
+    font-size: var(--bio-card-title-size, 1.12rem);
+    font-weight: var(--bio-card-title-weight, 800);
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    text-shadow: 0 1px 8px rgb(0 0 0 / 28%);
+}
+
+.bio-card--layout-cover .bio-card__description {
+    display: -webkit-box;
+    overflow: hidden;
+    color: rgb(255 255 255 / 90%);
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-height: 1.38;
+}
+
+.bio-card--layout-cover .bio-card__arrow--circle {
+    position: absolute;
+    right: 14px;
+    bottom: 16px;
+}
+
+.bio-card--layout-cover .bio-card__badge {
+    margin-top: 4px;
+    background: rgb(255 255 255 / 18%);
+    color: #fff;
+}
+
+.bio-card--layout-button {
+    border-left-width: 0;
+    background: var(--bio-card-surface, #fffdf9);
+    color: var(--bio-card-text, var(--bio-text, #183b34));
+}
+
+.bio-card__article-image {
+    display: grid;
+    width: 100%;
+    aspect-ratio: 1.7 / 1;
+    overflow: hidden;
+    place-items: center;
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 15%, #e9efff);
+}
+
+.bio-card__article-image .bio-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease;
+}
+
+.bio-card--linked:hover .bio-card__article-image .bio-card__image {
+    transform: scale(1.025);
+}
+
+.bio-card__article-fallback {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--bio-card-accent, #2563eb) 68%, #e0eaff), color-mix(in srgb, var(--bio-card-accent, #2563eb) 24%, #172554));
+    color: rgb(255 255 255 / 82%);
+}
+
+.bio-card__article-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 18px;
+}
+
+.bio-card--layout-button .bio-card__title {
+    font-family: "Garet", "Poppins", sans-serif;
+    color: var(--bio-card-title-color, var(--bio-card-text, var(--bio-text, #183b34)));
+    font-size: var(--bio-card-title-size, 1.1rem);
+    font-weight: var(--bio-card-title-weight, 800);
+    letter-spacing: -0.03em;
+    line-height: 1.22;
+}
+
+.bio-card--layout-button .bio-card__description {
+    display: -webkit-box;
+    overflow: hidden;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.bio-card--layout-button .bio-card__badge {
+    margin-top: 0;
+}
+
+.bio-card__cta {
+    display: flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 5px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 0.94rem;
+    font-weight: 750;
+    line-height: 1.2;
+    text-align: center;
+    transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.bio-card--linked:hover .bio-card__cta {
+    transform: translateY(-1px);
+    background: #1d4ed8;
+}
+
+.bio-card--layout-compact:focus-visible,
+.bio-card--layout-cover:focus-visible,
+.bio-card--layout-button:focus-visible {
+    outline: 3px solid var(--bio-accent, #147d69);
+    outline-offset: 4px;
+}
+
+/* ── Mini layout ─────────────────────────────────────────── */
+.bio-card--layout-mini {
+    border-left-width: 0;
+    background: var(--bio-card-surface, var(--bio-card-background, #fffdf9));
+}
+
+.bio-card__body--mini {
+    min-height: 60px;
+    padding: 10px 12px;
+    gap: 10px;
+}
+
+.bio-card__thumbnail--mini {
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: max(7px, calc(var(--bio-radius, 24px) / 3));
+}
+
+.bio-card__arrow--small {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+}
+
+.bio-card--layout-mini .bio-card__copy {
+    overflow: hidden;
+}
+
+.bio-card--layout-mini .bio-card__title {
+    font-size: var(--bio-card-title-size, 0.92rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+.bio-card--layout-mini .bio-card__description {
+    font-size: 0.78rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+
+@media (max-width: 360px) {
+    .bio-card--layout-compact .bio-card__body {
+        gap: 9px;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+
+    .bio-card__thumbnail {
+        flex-basis: 48px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .bio-card__arrow--circle {
+        flex-basis: 32px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .bio-card__article-body {
+        padding: 15px;
+    }
+}
+
+/* Background image overlay — keeps text readable */
+.bio-page[data-bg-type="image"] {
+    background-color: var(--bio-background, #f5f1eb);
+}
+
+.bio-page[data-bg-type="image"] .bio-page__mesh {
+    background:
+        radial-gradient(ellipse 120% 60% at 50% 0%, rgba(0,0,0,0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 120% 60% at 50% 100%, rgba(0,0,0,0.18) 0%, transparent 70%);
+    opacity: 1;
+}
+
+.bio-page[data-bg-type="image"] .bio-shell {
+    background: transparent;
+}
+
+.bio-page[data-bg-type="image"] .bio-card {
+    background: color-mix(in srgb, var(--bio-card-background, #fffdf9) 92%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.bio-page[data-bg-type="image"] .bio-socials__link {
+    background: color-mix(in srgb, var(--bio-card-background, #fffdf9) 70%, transparent);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* Gradient background — disable the built-in gradient style when custom gradient used */
+.bio-page[data-bg-type="gradient"][data-style="gradient"] {
+    background-image: none;
+}
+
+/* ── Maps card — mapa no topo, info embaixo ─────────────── */
+.bio-card--maps {
+    border: 1px solid color-mix(in srgb, var(--bio-text, #183b34) 12%, transparent);
+    border-left-width: 1px;        /* sem barra lateral colorida */
+    border-radius: var(--bio-radius, 24px);
+    overflow: hidden;
+    padding: 0;
+    background: var(--bio-card-background, #fffdf9);
+}
+
+/* iframe no topo — altura fixa, sem scroll */
+.bio-card__maps-frame {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    display: block;
+    background: #d6e4ec;
+    pointer-events: none;   /* evita scroll acidental no mobile */
+}
+
+.bio-card__maps-frame iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    pointer-events: none;
+}
+
+/* Placeholder sem URL */
+.bio-card__maps-placeholder {
+    display: grid;
+    place-items: center;
+    height: 180px;
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 10%, #d6e4ec);
+    color: var(--bio-card-accent, var(--bio-accent, #147d69));
+    opacity: 0.55;
+}
+
+/* Corpo de texto — fundo do card, padding confortável */
+.bio-card__maps-body {
+    padding: 14px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.bio-card__maps-title {
+    font-family: "Garet", "Poppins", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    color: var(--bio-card-text, var(--bio-text, #183b34));
+    overflow-wrap: anywhere;
+}
+
+.bio-card__maps-desc {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--bio-card-text, var(--bio-text, #183b34)) 65%, transparent);
+    overflow-wrap: anywhere;
+}
+
+/* Rodapé com botões */
+.bio-card__maps-actions {
+    display: flex;
+    gap: 8px;
+    padding: 8px 14px 14px;
+    flex-wrap: wrap;
+}
+
+.bio-card__maps-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 160ms ease, transform 160ms ease;
+    cursor: pointer;
+}
+
+.bio-card__maps-btn--primary {
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 14%, transparent);
+    color: var(--bio-card-accent, var(--bio-accent, #147d69));
+    border: 1px solid color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 30%, transparent);
+}
+
+.bio-card__maps-btn--primary:hover {
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 22%, transparent);
+    transform: translateY(-1px);
+}
+
+.bio-card__maps-btn--secondary {
+    background: transparent;
+    color: var(--bio-card-text, var(--bio-text, #183b34));
+    border: 1px solid color-mix(in srgb, var(--bio-card-text, var(--bio-text, #183b34)) 22%, transparent);
+}
+
+.bio-card__maps-btn--secondary:hover {
+    background: color-mix(in srgb, var(--bio-card-text, var(--bio-text, #183b34)) 6%, transparent);
+    transform: translateY(-1px);
+}
+
+/* ── General UI refinements ──────────────────────────────── */
+
+/* Slightly larger avatar with better shadow */
+.bio-profile__avatar {
+    width: 100px;
+    height: 100px;
+    border-width: 3px;
+    box-shadow:
+        0 0 0 6px color-mix(in srgb, var(--bio-accent, #147d69) 10%, transparent),
+        0 12px 32px color-mix(in srgb, var(--bio-text, #183b34) 14%, transparent);
+}
+
+/* Description line height */
+.bio-profile__description {
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+/* Card gap increase for breathing room */
+.bio-cards {
+    gap: 14px;
+}
+
+/* Smoother card shadows */
+.bio-card {
+    box-shadow:
+        0 2px 6px color-mix(in srgb, var(--bio-text, #183b34) 5%, transparent),
+        0 8px 24px color-mix(in srgb, var(--bio-text, #183b34) 7%, transparent);
+    transition: transform 200ms cubic-bezier(.34,1.56,.64,1), box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.bio-card--linked:hover {
+    transform: translateY(-3px) scale(1.008);
+    box-shadow:
+        0 4px 10px color-mix(in srgb, var(--bio-text, #183b34) 7%, transparent),
+        0 16px 36px color-mix(in srgb, var(--bio-text, #183b34) 14%, transparent);
+}
+
+/* Social icons slightly larger */
+.bio-socials__link {
+    width: 44px;
+    height: 44px;
+}
+
+/* Footer more subtle */
+.bio-footer {
+    margin-top: 40px;
+    padding-bottom: 8px;
+}
+
+/* ── Card size (padding scale) ───────────────────────────── */
+.bio-page[data-card-size="xs"] .bio-card__body,
+.bio-page[data-card-size="xs"] .bio-card__body--mini   { padding: 8px 10px; min-height: 48px; }
+.bio-page[data-card-size="xs"] .bio-card__thumbnail    { flex: 0 0 36px; width: 36px; height: 36px; }
+.bio-page[data-card-size="xs"] .bio-card__thumbnail--mini { flex: 0 0 28px; width: 28px; height: 28px; }
+.bio-page[data-card-size="xs"] .bio-card__title        { font-size: 0.82rem; }
+.bio-page[data-card-size="xs"] .bio-card__description  { font-size: 0.72rem; }
+
+.bio-page[data-card-size="sm"] .bio-card__body,
+.bio-page[data-card-size="sm"] .bio-card__body--mini   { padding: 10px 12px; min-height: 60px; }
+.bio-page[data-card-size="sm"] .bio-card__thumbnail    { flex: 0 0 44px; width: 44px; height: 44px; }
+.bio-page[data-card-size="sm"] .bio-card__thumbnail--mini { flex: 0 0 34px; width: 34px; height: 34px; }
+.bio-page[data-card-size="sm"] .bio-card__title        { font-size: 0.9rem; }
+.bio-page[data-card-size="sm"] .bio-card__description  { font-size: 0.78rem; }
+
+/* md = default — no overrides needed */
+
+.bio-page[data-card-size="lg"] .bio-card__body,
+.bio-page[data-card-size="lg"] .bio-card__body--mini   { padding: 18px 20px; min-height: 90px; }
+.bio-page[data-card-size="lg"] .bio-card__thumbnail    { flex: 0 0 66px; width: 66px; height: 66px; }
+.bio-page[data-card-size="lg"] .bio-card__thumbnail--mini { flex: 0 0 50px; width: 50px; height: 50px; }
+.bio-page[data-card-size="lg"] .bio-card__title        { font-size: 1.1rem; }
+.bio-page[data-card-size="lg"] .bio-card__description  { font-size: 0.92rem; }
+
+.bio-page[data-card-size="xl"] .bio-card__body,
+.bio-page[data-card-size="xl"] .bio-card__body--mini   { padding: 24px 28px; min-height: 108px; }
+.bio-page[data-card-size="xl"] .bio-card__thumbnail    { flex: 0 0 80px; width: 80px; height: 80px; }
+.bio-page[data-card-size="xl"] .bio-card__thumbnail--mini { flex: 0 0 60px; width: 60px; height: 60px; }
+.bio-page[data-card-size="xl"] .bio-card__title        { font-size: 1.22rem; }
+.bio-page[data-card-size="xl"] .bio-card__description  { font-size: 1rem; }
+
+/* ── Card & profile alignment ────────────────────────────── */
+.bio-page[data-card-align="center"] .bio-profile       { text-align: center; }
+.bio-page[data-card-align="center"] .bio-card__copy    { align-items: center; text-align: center; }
+.bio-page[data-card-align="center"] .bio-card__heading { text-align: center; }
+.bio-page[data-card-align="center"] .bio-card__description { text-align: center; }
+.bio-page[data-card-align="center"] .bio-card__body    { justify-content: center; }
+.bio-page[data-card-align="center"] .bio-card__main    { flex-direction: column; align-items: center; text-align: center; }
+.bio-page[data-card-align="center"] .bio-card__thumbnail { flex: 0 0 auto; }
+.bio-page[data-card-align="center"] .bio-card--layout-compact .bio-card__title,
+.bio-page[data-card-align="center"] .bio-card--layout-compact .bio-card__description,
+.bio-page[data-card-align="center"] .bio-card--layout-mini .bio-card__title,
+.bio-page[data-card-align="center"] .bio-card--layout-mini .bio-card__description {
+    white-space: normal;
+    text-align: center;
+}
+
+.bio-page[data-card-align="right"] .bio-profile       { align-items: flex-end; text-align: right; }
+.bio-page[data-card-align="right"] .bio-card__copy    { align-items: flex-end; text-align: right; }
+.bio-page[data-card-align="right"] .bio-card__heading { text-align: right; }
+.bio-page[data-card-align="right"] .bio-card__description { text-align: right; }
+.bio-page[data-card-align="right"] .bio-card__body    { flex-direction: row-reverse; }
+.bio-page[data-card-align="right"] .bio-card--layout-compact .bio-card__title,
+.bio-page[data-card-align="right"] .bio-card--layout-mini .bio-card__title { text-align: right; }
+
+/* ── Dark mode ───────────────────────────────────────────── */
+.bio-page[data-scheme="dark"] {
+    --bio-background:      #0f1a16;
+    --bio-text:            #e8f0ea;
+    --bio-card-background: #1a2e24;
+    --bio-accent:          #4fd6b4;
+    color-scheme: dark;
+}
+
+/* Use the user-defined colours when dark but still respect overrides */
+.bio-page[data-scheme="dark"] .bio-card {
+    border-color: rgba(255,255,255,0.08);
+    box-shadow:
+        0 2px 6px rgba(0,0,0,0.35),
+        0 8px 24px rgba(0,0,0,0.45);
+}
+
+.bio-page[data-scheme="dark"] .bio-card--linked:hover {
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.4),
+        0 16px 36px rgba(0,0,0,0.55);
+}
+
+.bio-page[data-scheme="dark"] .bio-profile__avatar {
+    border-color: rgba(255,255,255,0.12);
+    box-shadow:
+        0 0 0 6px rgba(255,255,255,0.04),
+        0 12px 32px rgba(0,0,0,0.5);
+}
+
+.bio-page[data-scheme="dark"] .bio-empty {
+    border-color: rgba(255,255,255,0.14);
+    background: rgba(255,255,255,0.03);
+    color: rgba(232,240,234,0.6);
+}
+
+.bio-page[data-scheme="dark"] .bio-socials__link {
+    border-color: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.05);
+}
+
+.bio-page[data-scheme="dark"] .bio-socials__link:hover {
+    background: var(--bio-accent, #4fd6b4);
+    color: #0f1a16;
+}
+
+.bio-page[data-scheme="dark"] .bio-preview-badge {
+    background: rgba(255,255,255,0.06);
+}
+
+.bio-page[data-scheme="dark"] .bio-footer__link {
+    color: rgba(232,240,234,0.45);
+}
+
+.bio-page[data-scheme="dark"] .bio-footer__link:hover {
+    color: var(--bio-accent, #4fd6b4);
+}
+
+/* Dark: card image overlay a tad more transparent so images pop */
+.bio-page[data-scheme="dark"] .bio-card__cover-shade {
+    background: linear-gradient(180deg, rgba(0,0,0,0.08) 20%, rgba(0,0,0,0.88) 100%);
+}
+
+/* Dark: mesh uses accent with higher opacity */
+.bio-page[data-scheme="dark"] .bio-page__mesh {
+    opacity: 0.4;
+}
+
+/* Dark: keep the dotted pattern visible */
+.bio-page[data-scheme="dark"][data-style="dotted"] {
+    background-image: radial-gradient(circle at 1px 1px, rgba(79,214,180,0.3) 1px, transparent 1.2px);
+}
+
+
+/* ════════════════════════════════════════════════
+   PER-CARD SIZE — CSS vars injetadas inline pelo PHP
+   Cada card pode ter tamanho individual.
+   ════════════════════════════════════════════════ */
+
+.bio-card {
+    /* Fallback values — overridden per-card via style="" */
+    --bio-item-padding:    14px 15px;
+    --bio-item-min-height: 72px;
+    --bio-item-thumb:      56px;
+    --bio-item-mini-thumb: 40px;
+    --bio-item-title-fs:   1rem;
+    --bio-item-arrow:      36px;
+    --bio-item-align:      left;
+}
+
+.bio-card__body,
+.bio-card__body--mini {
+    min-height: var(--bio-item-min-height, 72px);
+    padding:    var(--bio-item-padding, 14px 15px);
+}
+
+.bio-card__thumbnail {
+    flex:   0 0 var(--bio-item-thumb, 56px);
+    width:  var(--bio-item-thumb, 56px);
+    height: var(--bio-item-thumb, 56px);
+}
+
+.bio-card__thumbnail--mini {
+    flex:   0 0 var(--bio-item-mini-thumb, 40px);
+    width:  var(--bio-item-mini-thumb, 40px);
+    height: var(--bio-item-mini-thumb, 40px);
+}
+
+.bio-card__arrow--circle {
+    flex:   0 0 var(--bio-item-arrow, 36px);
+    width:  var(--bio-item-arrow, 36px);
+    height: var(--bio-item-arrow, 36px);
+}
+
+/* Title font-size driven by per-card var (falls back to --bio-card-title-size typography override) */
+.bio-card__title {
+    font-size: var(--bio-item-title-fs, var(--bio-card-title-size, 1rem));
+}
+
+/* ════════════════════════════════════════════════
+   PER-CARD ALIGNMENT — CSS var injetada inline
+   ════════════════════════════════════════════════ */
+
+/* Center */
+.bio-card[style*="--bio-item-align: center"] .bio-card__body:not(.bio-card__body--mini),
+.bio-card[style*="--bio-item-align:center"] .bio-card__body:not(.bio-card__body--mini) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.bio-card[style*="--bio-item-align: center"] .bio-card__main,
+.bio-card[style*="--bio-item-align:center"] .bio-card__main {
+    flex-direction: column;
+    align-items: center;
+}
+.bio-card[style*="--bio-item-align: center"] .bio-card__copy,
+.bio-card[style*="--bio-item-align:center"] .bio-card__copy {
+    align-items: center;
+    text-align: center;
+}
+.bio-card[style*="--bio-item-align: center"] .bio-card__title,
+.bio-card[style*="--bio-item-align:center"] .bio-card__title,
+.bio-card[style*="--bio-item-align: center"] .bio-card__description,
+.bio-card[style*="--bio-item-align:center"] .bio-card__description,
+.bio-card[style*="--bio-item-align: center"] .bio-card__heading,
+.bio-card[style*="--bio-item-align:center"] .bio-card__heading {
+    text-align: center;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+}
+.bio-card--heading[style*="--bio-item-align: center"],
+.bio-card--heading[style*="--bio-item-align:center"],
+.bio-card--text[style*="--bio-item-align: center"],
+.bio-card--text[style*="--bio-item-align:center"] {
+    text-align: center;
+}
+
+/* Right */
+.bio-card[style*="--bio-item-align: right"] .bio-card__body,
+.bio-card[style*="--bio-item-align:right"] .bio-card__body {
+    flex-direction: row-reverse;
+}
+.bio-card[style*="--bio-item-align: right"] .bio-card__copy,
+.bio-card[style*="--bio-item-align:right"] .bio-card__copy {
+    align-items: flex-end;
+    text-align: right;
+}
+.bio-card[style*="--bio-item-align: right"] .bio-card__title,
+.bio-card[style*="--bio-item-align:right"] .bio-card__title,
+.bio-card[style*="--bio-item-align: right"] .bio-card__description,
+.bio-card[style*="--bio-item-align:right"] .bio-card__description,
+.bio-card[style*="--bio-item-align: right"] .bio-card__heading,
+.bio-card[style*="--bio-item-align:right"] .bio-card__heading {
+    text-align: right;
+}
+.bio-card--heading[style*="--bio-item-align: right"],
+.bio-card--heading[style*="--bio-item-align:right"],
+.bio-card--text[style*="--bio-item-align: right"],
+.bio-card--text[style*="--bio-item-align:right"] {
+    text-align: right;
+}
+
+/* ════════════════════════════════════════════════
+   DARK MODE  (data-scheme="dark")
+   Afeta a PÁGINA INTEIRA — html, body, e todos
+   os elementos públicos.
+   ════════════════════════════════════════════════ */
+
+/* Reset html/body background quando dark */
+html:has(.bio-page[data-scheme="dark"]),
+.bio-page[data-scheme="dark"] {
+    color-scheme: dark;
+    background: #0e1813;
+}
+
+body:has(.bio-page[data-scheme="dark"]) {
+    background: #0e1813;
+    color: #e6ede8;
+}
+
+.bio-page[data-scheme="dark"] {
+    --bio-background:      #0e1813;
+    --bio-text:            #e6ede8;
+    --bio-card-background: #192a20;
+    --bio-accent:          #56d9b2;
+    background: var(--bio-background, #0e1813);
+    color: var(--bio-text, #e6ede8);
+}
+
+/* Mesh mais discreto */
+.bio-page[data-scheme="dark"] .bio-page__mesh {
+    opacity: 0.3;
+}
+
+/* Fundo sólido escuro */
+.bio-page[data-scheme="dark"][data-style="gradient"] {
+    background-image: linear-gradient(155deg, #0e1813 0%, #192a20 100%);
+}
+
+/* Textura pontilhada visível no dark */
+.bio-page[data-scheme="dark"][data-style="dotted"] {
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(86, 217, 178, 0.22) 1px,
+        transparent 1.2px
+    );
+}
+
+/* Cards escuros */
+.bio-page[data-scheme="dark"] .bio-card {
+    background: var(--bio-card-background, #192a20);
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.4),
+        0 8px 26px rgba(0, 0, 0, 0.55);
+}
+
+.bio-page[data-scheme="dark"] .bio-card--linked:hover {
+    border-color: var(--bio-accent, #56d9b2);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.5),
+        0 18px 40px rgba(0, 0, 0, 0.65);
+}
+
+/* Glass com imagem/gradiente de fundo */
+.bio-page[data-scheme="dark"][data-bg-type="image"] .bio-card,
+.bio-page[data-scheme="dark"][data-bg-type="gradient"] .bio-card {
+    background: rgba(25, 42, 32, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Highlight no dark */
+.bio-page[data-scheme="dark"] .bio-card--highlight {
+    box-shadow:
+        0 0 0 2px rgba(86, 217, 178, 0.3),
+        0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Avatar */
+.bio-page[data-scheme="dark"] .bio-profile__avatar {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: var(--bio-card-background, #192a20);
+    box-shadow:
+        0 0 0 6px rgba(86, 217, 178, 0.07),
+        0 14px 36px rgba(0, 0, 0, 0.6);
+}
+
+/* Estado vazio */
+.bio-page[data-scheme="dark"] .bio-empty {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(230, 237, 232, 0.5);
+}
+
+/* Badge de prévia */
+.bio-page[data-scheme="dark"] .bio-preview-badge {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(86, 217, 178, 0.22);
+    color: var(--bio-accent, #56d9b2);
+}
+
+/* Ícones sociais */
+.bio-page[data-scheme="dark"] .bio-socials__link {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+}
+.bio-page[data-scheme="dark"] .bio-socials__link:hover {
+    background: var(--bio-accent, #56d9b2);
+    color: #0e1813;
+    border-color: transparent;
+}
+
+/* Botão outline no dark */
+.bio-page[data-scheme="dark"][data-button-style="outline"] .bio-card--linked {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--bio-card-accent, var(--bio-accent, #56d9b2));
+}
+
+/* Sombra do cover */
+.bio-page[data-scheme="dark"] .bio-card__cover-shade {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 10%, rgba(0, 0, 0, 0.92) 100%);
+}
+
+/* Botão CTA no dark */
+.bio-page[data-scheme="dark"] .bio-card__cta {
+    background: var(--bio-accent, #56d9b2);
+    color: #0e1813;
+}
+.bio-page[data-scheme="dark"] .bio-card--linked:hover .bio-card__cta {
+    background: color-mix(in srgb, var(--bio-accent, #56d9b2) 85%, #fff);
+}
+
+/* Seta no dark */
+.bio-page[data-scheme="dark"] .bio-card__arrow--circle {
+    background: var(--bio-accent, #56d9b2);
+    color: #0e1813;
+}
+.bio-page[data-scheme="dark"] .bio-card--linked:hover .bio-card__arrow--circle {
+    background: color-mix(in srgb, var(--bio-accent, #56d9b2) 85%, #fff);
+}
+
+/* Footer */
+.bio-page[data-scheme="dark"] .bio-footer__link {
+    color: rgba(230, 237, 232, 0.38);
+}
+.bio-page[data-scheme="dark"] .bio-footer__link:hover {
+    color: var(--bio-accent, #56d9b2);
+}
+
+/* -- Layout Banner � card = imagem pura, full width ------- */
+.bio-card--layout-banner {
+    border: none !important;
+    padding: 0 !important;
+    overflow: hidden;
+    background: #d8dfe4;
+    display: block;
+    box-shadow: none !important;
+}
+
+.bio-card--layout-banner.bio-card--linked:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--bio-text, #183b34) 14%, transparent) !important;
+}
+
+.bio-card__banner-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 320ms ease;
+    margin: 0;
+    padding: 0;
+}
+
+.bio-card--linked:hover .bio-card__banner-img {
+    transform: scale(1.03);
+}
+
+.bio-card__banner-placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 3 / 1;
+    background: color-mix(in srgb, var(--bio-card-accent, var(--bio-accent, #147d69)) 10%, #d8dfe4);
+    color: var(--bio-card-accent, var(--bio-accent, #147d69));
+    opacity: 0.5;
+}
+
+.bio-card__banner-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 14px 12px;
+    background: var(--bio-card-background, #fffdf9);
+}
+
+.bio-card--layout-banner .bio-card__title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.3;
+}
+
+.bio-card--layout-banner .bio-card__description {
+    font-size: 0.78rem;
+}
+
+/* ════════════════════════════════════════════════
+   TIPO PHOTO — imagem pura, sem card, transparente
+   ════════════════════════════════════════════════ */
+.bio-card--photo {
+    display: block;
+    width: 100%;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: var(--bio-radius, 24px);
+    line-height: 0;
+}
+
+.bio-card--photo img {
+    display: block;
+    width: 100%;
+    height: var(--photo-h, 120px);
+    object-fit: cover;
+    object-position: center;
+    border-radius: var(--bio-radius, 24px);
+    transition: transform 300ms cubic-bezier(.34,1.56,.64,1), opacity 200ms ease;
+}
+
+/* full: mantém proporção original da imagem */
+.bio-card--photo[style*="--photo-h:auto"] img {
+    height: auto;
+    aspect-ratio: unset;
+}
+
+a.bio-card--photo:hover img {
+    transform: scale(1.025);
+    opacity: 0.92;
+}
+
+.bio-card--photo__placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: var(--photo-h, 120px);
+    border-radius: var(--bio-radius, 24px);
+    background: color-mix(in srgb, var(--bio-accent, #147d69) 10%, transparent);
+    color: var(--bio-accent, #147d69);
+    opacity: 0.4;
+}
