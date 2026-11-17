@@ -258,7 +258,6 @@ final class PublicView
             'style'              => $style,
             'buttonStyle'        => $buttonStyle,
             'titleSize'          => $titleSizes[$titleSize],
-            'titleSizeName'      => $titleSize,
             'backgroundType'     => $backgroundType,
             'backgroundGradient' => $backgroundGradient,
             'backgroundImage'    => $backgroundImage,
@@ -395,22 +394,7 @@ final class PublicView
         // Per-card arrow visibility (default true)
         $showArrow = self::truthy($card['showArrow'] ?? true);
 
-        if ($type === 'heading') {
-            echo '<article class="' . e(implode(' ', $classes)) . '" style="' . e($cardStyle) . '">' . PHP_EOL;
-            if ($title !== '') {
-                echo '<h2 class="bio-card__heading">' . e($title) . '</h2>' . PHP_EOL;
-            }
-            if ($description !== '') {
-                echo '<p class="bio-card__description">' . e($description) . '</p>' . PHP_EOL;
-            }
-            if ($badge !== '') {
-                echo '<span class="bio-card__badge">' . e($badge) . '</span>' . PHP_EOL;
-            }
-            echo '</article>' . PHP_EOL;
-            return;
-        }
-
-        if ($type === 'text') {
+        if ($type === 'heading' || $type === 'text') {
             echo '<article class="' . e(implode(' ', $classes)) . '" style="' . e($cardStyle) . '">' . PHP_EOL;
             if ($title !== '') {
                 echo '<h2 class="bio-card__heading">' . e($title) . '</h2>' . PHP_EOL;

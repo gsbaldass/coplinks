@@ -282,10 +282,8 @@ final class AdminView
 
     private function cardEditor(string $action, array $card): void
     {
-        $isMaps   = $card['type'] === 'maps';
-        $isPhoto  = $card['type'] === 'photo';
-        $isBanner = in_array($card['type'], ['link', 'image'], true)
-                    && ($card['layout'] ?? '') === 'banner';
+        $isMaps  = $card['type'] === 'maps';
+        $isPhoto = $card['type'] === 'photo';
         ?><form class="panel card-editor" method="post" action="<?= e($action) ?>" enctype="multipart/form-data" data-live-preview-form data-live-preview-endpoint="<?= e($action) ?>/live-preview"><?php $this->csrf(); ?><input type="hidden" name="action" value="card-save"><input type="hidden" name="card_id" value="<?= e($card['id']) ?>"><div class="panel-title"><?= icon('edit', 20) ?><div><h2>Personalizar card</h2><p>Conteúdo e aparência em um só lugar.</p></div><a class="icon-button close-editor" href="<?= e($action) ?>" aria-label="Fechar editor">×</a></div>
         <?php if ($isPhoto): ?>
             <input type="hidden" name="title" value="">
